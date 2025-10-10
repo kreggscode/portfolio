@@ -1,31 +1,14 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Gradient definition -->
-  <defs>
-    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00FF00;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00CC00;stop-opacity:1" />
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
+  <!-- Bright green background -->
+  <rect width="64" height="64" rx="8" fill="#00FF00"/>
   
-  <!-- Dark background with border -->
-  <rect width="64" height="64" rx="12" fill="#0D1117"/>
-  <rect width="64" height="64" rx="12" fill="none" stroke="url(#greenGradient)" stroke-width="3"/>
-  
-  <!-- Bold K letter -->
-  <path d="M 20 16 L 20 48 M 20 32 L 38 16 M 20 32 L 38 48" 
-        stroke="url(#greenGradient)" 
-        stroke-width="5" 
+  <!-- Dark K letter - SUPER BOLD -->
+  <path d="M 16 12 L 16 52 M 16 32 L 40 12 M 16 32 L 40 52" 
+        stroke="#000000" 
+        stroke-width="8" 
         stroke-linecap="round" 
-        stroke-linejoin="round"
-        filter="url(#glow)"/>
+        stroke-linejoin="round"/>
   
-  <!-- Code brackets -->
-  <text x="40" y="38" font-family="monospace" font-size="24" font-weight="bold" fill="url(#greenGradient)" filter="url(#glow)">&lt;/&gt;</text>
+  <!-- Code brackets in corner -->
+  <text x="44" y="20" font-family="monospace" font-size="16" font-weight="bold" fill="#000000">&lt;/&gt;</text>
 </svg>
