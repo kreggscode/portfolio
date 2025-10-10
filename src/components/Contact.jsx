@@ -1,15 +1,23 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaLinkedin, FaTwitter, FaGithub, FaTelegram, FaDiscord } from 'react-icons/fa'
+import ContactForm from './ContactForm'
 
 const Contact = () => {
   const contactMethods = [
     {
       icon: <FaEnvelope />,
-      title: 'Email',
-      value: 'kreggscode@gmail.com',
-      link: 'mailto:kreggscode@gmail.com',
+      title: 'Primary Email',
+      value: 'kreg9da@gmail.com',
+      link: 'mailto:kreg9da@gmail.com',
       color: '#D14836'
+    },
+    {
+      icon: <FaEnvelope />,
+      title: 'Business Email',
+      value: 'kregg@kreggscode.com',
+      link: 'mailto:kregg@kreggscode.com',
+      color: '#00FF00'
     },
     {
       icon: <FaLinkedin />,
@@ -148,10 +156,17 @@ const Contact = () => {
                 Prefer email? Drop me a message at:
               </p>
               <a 
-                href="mailto:kreggscode@gmail.com"
-                className="text-primary font-bold text-xl hover:underline"
+                href="mailto:kreg9da@gmail.com"
+                className="text-primary font-bold text-xl hover:underline block mb-2"
               >
-                kreggscode@gmail.com
+                kreg9da@gmail.com
+              </a>
+              <p className="text-sm text-gray-400">or</p>
+              <a 
+                href="mailto:kregg@kreggscode.com"
+                className="text-primary font-bold text-lg hover:underline block mt-2"
+              >
+                kregg@kreggscode.com
               </a>
             </motion.div>
           </motion.div>
@@ -160,7 +175,17 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-16 max-w-3xl mx-auto"
+        >
+          <ContactForm />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
           viewport={{ once: true }}
           className="text-center mt-16"
         >
