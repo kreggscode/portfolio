@@ -156,7 +156,7 @@ MIT License - feel free to use this for your own portfolio!
 ## 🤝 Contact
 
 - **Website**: https://kreggscode.com
-- **Email**: kreggscode@gmail.com
+- **Email**: kreg9da@gmail.com
 - **GitHub**: https://github.com/kreggscode
 - **LinkedIn**: https://linkedin.com/in/kreggscode
 
