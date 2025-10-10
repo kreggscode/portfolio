@@ -31,13 +31,12 @@ const ContactForm = () => {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_KEY', // You'll need to get this from web3forms.com
+          access_key: '7f9260e4-fd32-49f2-893e-0f709376480c',
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          from_name: formData.name,
-          to_email: 'kreg9da@gmail.com'
+          from_name: formData.name
         })
       })
 
