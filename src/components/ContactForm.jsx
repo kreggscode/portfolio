@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaPaperPlane, FaCheckCircle } from 'react-icons/fa'
+import { FaPaperPlane, FaCheckCircle, FaExclamationTriangle, FaSpinner } from 'react-icons/fa'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const ContactForm = () => {
     subject: '',
     message: ''
   })
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState('') // '', 'sending', 'success', 'error'
 
   const handleChange = (e) => {
     setFormData({
@@ -18,25 +18,47 @@ const ContactForm = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setStatus('sending')
     
-    // Create mailto link with form data
-    const mailtoLink = `mailto:kreg9da@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`
-    
-    // Open email client
-    window.location.href = mailtoLink
-    
-    // Show success message
-    setStatus('success')
-    
-    // Reset form
-    setTimeout(() => {
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setStatus('')
-    }, 3000)
+    try {
+      // Using Web3Forms - Free service, no signup needed for basic use
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_WEB3FORMS_KEY', // You'll need to get this from web3forms.com
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: formData.name,
+          to_email: 'kreg9da@gmail.com'
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setStatus('success')
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setFormData({ name: '', email: '', subject: '', message: '' })
+          setStatus('')
+        }, 3000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus(''), 5000)
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      setStatus('error')
+      setTimeout(() => setStatus(''), 5000)
+    }
   }
 
   return (
@@ -59,7 +81,29 @@ const ContactForm = () => {
           className="bg-green-500/20 border border-green-500 text-green-400 p-4 rounded-lg mb-6 flex items-center gap-2"
         >
           <FaCheckCircle />
-          <span>Opening your email client...</span>
+          <span>Message sent successfully! I'll get back to you soon! 🎉</span>
+        </motion.div>
+      )}
+
+      {status === 'error' && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-500/20 border border-red-500 text-red-400 p-4 rounded-lg mb-6 flex items-center gap-2"
+        >
+          <FaExclamationTriangle />
+          <span>Oops! Something went wrong. Please try again or email me directly.</span>
+        </motion.div>
+      )}
+
+      {status === 'sending' && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-blue-500/20 border border-blue-500 text-blue-400 p-4 rounded-lg mb-6 flex items-center gap-2"
+        >
+          <FaSpinner className="animate-spin" />
+          <span>Sending your message...</span>
         </motion.div>
       )}
 
@@ -130,17 +174,31 @@ const ContactForm = () => {
 
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full bg-primary hover:bg-primary/80 text-secondary font-bold py-4 px-6 rounded-lg transition-all flex items-center justify-center gap-2 group"
+          disabled={status === 'sending'}
+          whileHover={{ scale: status === 'sending' ? 1 : 1.02 }}
+          whileTap={{ scale: status === 'sending' ? 1 : 0.98 }}
+          className={`w-full font-bold py-4 px-6 rounded-lg transition-all flex items-center justify-center gap-2 group ${
+            status === 'sending' 
+              ? 'bg-gray-600 cursor-not-allowed' 
+              : 'bg-primary hover:bg-primary/80 text-secondary'
+          }`}
         >
-          <FaPaperPlane className="group-hover:translate-x-1 transition-transform" />
-          Send Message
+          {status === 'sending' ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Sending...
+            </>
+          ) : (
+            <>
+              <FaPaperPlane className="group-hover:translate-x-1 transition-transform" />
+              Send Message
+            </>
+          )}
         </motion.button>
       </form>
 
       <p className="text-sm text-gray-400 mt-4 text-center">
-        This will open your email client with the message pre-filled
+        Your message will be sent directly to my inbox 📧
       </p>
     </motion.div>
   )

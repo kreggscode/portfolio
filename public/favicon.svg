@@ -1,14 +1,31 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background circle -->
-  <circle cx="32" cy="32" r="30" fill="#0D1117"/>
-  <circle cx="32" cy="32" r="30" stroke="#00FF00" stroke-width="2"/>
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FF00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00CC00;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
   
-  <!-- K letter in code style -->
-  <path d="M 18 18 L 18 46 M 18 32 L 32 18 M 18 32 L 32 46" stroke="#00FF00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Dark background with border -->
+  <rect width="64" height="64" rx="12" fill="#0D1117"/>
+  <rect width="64" height="64" rx="12" fill="none" stroke="url(#greenGradient)" stroke-width="3"/>
+  
+  <!-- Bold K letter -->
+  <path d="M 20 16 L 20 48 M 20 32 L 38 16 M 20 32 L 38 48" 
+        stroke="url(#greenGradient)" 
+        stroke-width="5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        filter="url(#glow)"/>
   
   <!-- Code brackets -->
-  <path d="M 36 22 L 40 22 L 46 32 L 40 42 L 36 42" stroke="#00FF00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <!-- Glow effect -->
-  <circle cx="32" cy="32" r="28" fill="none" stroke="#00FF00" stroke-width="1" opacity="0.3"/>
+  <text x="40" y="38" font-family="monospace" font-size="24" font-weight="bold" fill="url(#greenGradient)" filter="url(#glow)">&lt;/&gt;</text>
 </svg>
