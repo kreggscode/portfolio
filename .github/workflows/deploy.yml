@@ -25,6 +25,19 @@ jobs:
       - name: Build project
         run: npm run build
       
+      - name: Inject Google AdSense Code
+        run: |
+          if [ -n "${{ secrets.ADSENSE_CODE }}" ]; then
+            # Escape special characters for sed
+            ADSENSE_ESCAPED=$(echo "${{ secrets.ADSENSE_CODE }}" | sed 's/[&/\]/\\&/g')
+            # Replace placeholder with actual AdSense code in built HTML
+            sed -i "s|<!-- ADSENSE_CODE_PLACEHOLDER -->|$ADSENSE_ESCAPED|g" ./dist/index.html
+            echo "✅ AdSense code injected successfully"
+          else
+            echo "⚠️ Warning: ADSENSE_CODE secret not set. Skipping AdSense injection."
+          fi
+        shell: bash
+      
       - name: Deploy to Hostinger via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
