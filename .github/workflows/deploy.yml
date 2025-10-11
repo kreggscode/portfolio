@@ -28,10 +28,18 @@ jobs:
       - name: Inject Google AdSense Code
         run: |
           if [ -n "${{ secrets.ADSENSE_CODE }}" ]; then
-            # Escape special characters for sed
-            ADSENSE_ESCAPED=$(echo "${{ secrets.ADSENSE_CODE }}" | sed 's/[&/\]/\\&/g')
-            # Replace placeholder with actual AdSense code in built HTML
-            sed -i "s|<!-- ADSENSE_CODE_PLACEHOLDER -->|$ADSENSE_ESCAPED|g" ./dist/index.html
+            # Save AdSense code to temporary file
+            echo "${{ secrets.ADSENSE_CODE }}" > /tmp/adsense.txt
+            # Use awk to replace placeholder with file content
+            awk '
+              /<!-- ADSENSE_CODE_PLACEHOLDER -->/ {
+                system("cat /tmp/adsense.txt")
+                next
+              }
+              { print }
+            ' ./dist/index.html > /tmp/index.html.tmp
+            mv /tmp/index.html.tmp ./dist/index.html
+            rm /tmp/adsense.txt
             echo "✅ AdSense code injected successfully"
           else
             echo "⚠️ Warning: ADSENSE_CODE secret not set. Skipping AdSense injection."
