@@ -1,11 +1,4 @@
 # Google AdSense ads.txt file for kreggscode.com
-# 
-# IMPORTANT: Replace 'pub-XXXXXXXXXX' with your actual AdSense publisher ID
-# You can find this in your Google AdSense dashboard under Ads → Ads.txt
-# 
-# Example format:
-# google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0
-#
-# After getting your publisher ID from AdSense, update the line below:
+# This file is required for AdSense verification and monetization
 
-google.com, pub-XXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-2381482053335864, DIRECT, f08c47fec0942fa0
