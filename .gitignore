@@ -22,3 +22,34 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables and secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Unnecessary documentation files (keep locally, don't push to GitHub)
+ADSENSE_QUICK_START.md
+ADSENSE_SETUP.md
+CONTACT_FORM_SETUP.md
+DEPLOY_NOW.md
+DEPLOYMENT_GUIDE.md
+FIX_DEPLOYMENT.md
+GITHUB_AUTO_DEPLOY.md
+GITHUB_SETUP.md
+HOSTINGER_CONNECT.md
+HOSTINGER_DEPLOYMENT.md
+LINKEDIN_PROFILE.md
+MANUAL_DEPLOY.md
+PROJECT_SUMMARY.md
+PUSH_TO_GITHUB.md
+QUICK_START.md
+README_FIRST.md
+START_HERE.md
+UPDATES_SUMMARY.md
+
+# Build artifacts and temporary files
+.tmp/
+.cache/
