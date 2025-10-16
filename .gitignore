@@ -31,6 +31,10 @@ dist-ssr
 .env.production.local
 
 # Unnecessary documentation files (keep locally, don't push to GitHub)
+*.md
+!README.md
+
+# Specific sensitive files
 ADSENSE_QUICK_START.md
 ADSENSE_SETUP.md
 CONTACT_FORM_SETUP.md
@@ -49,6 +53,11 @@ QUICK_START.md
 README_FIRST.md
 START_HERE.md
 UPDATES_SUMMARY.md
+
+# Setup and deployment scripts
+*.bat
+deploy.bat
+setup.bat
 
 # Build artifacts and temporary files
 .tmp/
